@@ -1,13 +1,11 @@
-// get elements
-
 // control buttons
-cnst start = document.querySelector('.start');
-cnst stop = document.querySelector('.stop');
-cnst randomize = document.querySelector('.randomize');
+const start = document.querySelector('.start');
+const stop = document.querySelector('.stop');
+const randomize = document.querySelector('.randomize');
 
 // canvas
-cnst canvas = document.querySelector('canvas');
-cnst ctx = canvas.getContext('2d');
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
 
 
 // global stopper 
@@ -16,16 +14,13 @@ let stopper = 0;
 
 // canvas details
 
-cnst resolution = 20;
+const resolution = 20;
 canvas.width = 1000;
 canvas.height = 800;
 
-
-
-
 // row and column 
-cnst COLS = canvas.width / resolution;
-cnst ROWS = canvas.height / resolution;
+const COLS = canvas.width / resolution;
+const ROWS = canvas.height / resolution;
 
 
 // function to build grid
@@ -53,15 +48,15 @@ function nextGen(grid){
    
    for(let col = 0; col < grid.length; col++){
     for(let row = 0; row < grid[col].length; row++){
-        cnst cell= grid[col][row];
+        const cell= grid[col][row];
         let numNeighbour = 0;
         for(let i= -1; i < 2 ; i++){
             for(let j= -1 ; j < 2 ; j++){
                if(i === 0 && j===0){
                    continue; 
                }
-               cnst x_cell = col+i;
-               cnst y_cell = row+j;
+               const x_cell = col+i;
+               const y_cell = row+j;
                if(x_cell >=0 && y_cell >0 &&  x_cell<COLS && y_cell < ROWS){
                   let currentNeighbour = grid[col+i][row+j];
                   numNeighbour += currentNeighbour;
@@ -69,11 +64,7 @@ function nextGen(grid){
 
                }
             }
-            
-        }
-
-
-        // rules of life
+      // rules of life
         if(cell === 1 && numNeighbour < 2){
           nextGen[col][row] = 0;  
         }else if(cell === 1 && numNeighbour > 3){
@@ -81,15 +72,9 @@ function nextGen(grid){
         }else if(cell === 0 && numNeighbour === 3){
           nextGen[col][row] = 1;
         }
-
-
     }
-  }
   return nextGen;
-
 }
-
-
 
 function render(grid) {
     for(let col = 0; col < grid.length; col++){
@@ -105,10 +90,6 @@ function render(grid) {
     }
 }
 
-
-
-// event listeners
-
 // start 
 
 start.addEventListener('click'  , () => {
@@ -122,7 +103,6 @@ randomize.addEventListener('click' , () => {
    grid = buildGrid();
    render(grid);
 })
-
 
 // stop 
 
